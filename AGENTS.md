@@ -10,6 +10,7 @@
 
 - [Where data comes from](./docs/dev/extracting-data.md)
 - [Book embeddings & vector cache](./docs/dev/embeddings.md)
+- [Comparing books (exploration tools)](./docs/dev/comparing-books.md)
 
 ## Keep docs up to date
 
