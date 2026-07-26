@@ -9,6 +9,7 @@
 ## Docs
 
 - [Where data comes from](./docs/dev/extracting-data.md)
+- [Book embeddings & vector cache](./docs/dev/embeddings.md)
 
 ## Keep docs up to date
 

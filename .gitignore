@@ -10,3 +10,4 @@ data/
 
 # direnv
 .direnv/
+**/__pycache__/
