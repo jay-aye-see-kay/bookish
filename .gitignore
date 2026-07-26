@@ -1,0 +1,12 @@
+# Large data files — regenerate with bin/extract.sh and bin/clean.sh
+data/
+
+# DuckDB scratch / WAL
+*.wal
+*.tmp
+
+# OS cruft
+.DS_Store
+
+# direnv
+.direnv/
