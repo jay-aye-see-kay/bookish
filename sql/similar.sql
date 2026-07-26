@@ -67,3 +67,41 @@ CREATE OR REPLACE MACRO recommend(liked_texts, n := 10) AS TABLE
   WHERE bv.input_text NOT IN (SELECT unnest(liked_texts))
   GROUP BY bv.author, bv.title, bv.year
   ORDER BY sim DESC LIMIT n;
+
+-- recommend from a preferences file (one 'Author|Title' per line).
+-- Each line fuzzy-matches its best book; the matches form the preference vector.
+--   exclude_pref_authors := true  ->  drop books by authors already in the file
+--                                     (discover new authors)
+CREATE OR REPLACE MACRO recommend_from_file(path, n := 20, exclude_pref_authors := false) AS TABLE
+  WITH prefs AS (
+    SELECT trim(author) author, trim(title) title
+    FROM read_csv(path, delim='|', header=false,
+                  columns={'author':'VARCHAR','title':'VARCHAR'})),
+  hits AS (
+    SELECT bv.input_text, bv.vec, bv.author
+    FROM prefs p
+    JOIN book_vecs bv
+      ON bv.title ILIKE '%'||p.title||'%' AND bv.author ILIKE '%'||p.author||'%'
+    QUALIFY row_number() OVER (
+      PARTITION BY p.author, p.title ORDER BY bv.editions DESC) = 1)
+  SELECT bv.author, bv.title, bv.year,
+         round(avg(list_cosine_similarity(bv.vec, h.vec)), 3) AS sim
+  FROM book_vecs bv CROSS JOIN hits h
+  WHERE bv.input_text NOT IN (SELECT input_text FROM hits)
+    AND (NOT exclude_pref_authors OR bv.author NOT IN (SELECT author FROM hits))
+  GROUP BY bv.author, bv.title, bv.year
+  ORDER BY sim DESC LIMIT n;
+
+-- which preference lines matched a book? (NULL matched_* = not in the corpus)
+CREATE OR REPLACE MACRO pref_matches(path) AS TABLE
+  WITH prefs AS (
+    SELECT trim(author) author, trim(title) title
+    FROM read_csv(path, delim='|', header=false,
+                  columns={'author':'VARCHAR','title':'VARCHAR'}))
+  SELECT p.author AS pref_author, p.title AS pref_title,
+         bv.author AS matched_author, bv.title AS matched_title
+  FROM prefs p
+  LEFT JOIN book_vecs bv
+    ON bv.title ILIKE '%'||p.title||'%' AND bv.author ILIKE '%'||p.author||'%'
+  QUALIFY row_number() OVER (
+    PARTITION BY p.author, p.title ORDER BY bv.editions DESC NULLS LAST) = 1;

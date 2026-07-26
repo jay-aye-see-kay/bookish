@@ -31,6 +31,8 @@ This attaches `data/books.duckdb` read-only and defines two views
 | `similar_to(q, n:=10, same_author:=true)` | nearest neighbours to the best match of `q` |
 | `similar_between(qa, qb)` | pairwise similarity between two books |
 | `recommend([texts], n:=10)` | "because you liked these" — mean cosine to a set |
+| `recommend_from_file(path, n:=20, exclude_pref_authors:=false)` | recommendations from an `Author\|Title` preferences file |
+| `pref_matches(path)` | which preference-file lines matched a book in the corpus |
 
 ### Examples
 
@@ -52,6 +54,35 @@ SELECT * FROM recommend(
   ['Book|Aldous Huxley|Brave New World', 'Book|Ray Bradbury|Fahrenheit 451']);
   -- surfaces Nineteen Eighty-Four, The Giver, ...
 ```
+
+### From a preferences file
+
+Keep a `preferences.txt`, one `Author|Title` per line (books you like):
+
+```
+Andy Weir|The Martian
+Iain Banks|Consider Phlebas
+Martha Wells|All Systems Red
+```
+
+Then rerun any time you edit it:
+
+```bash
+# top 20 recommendations, excluding authors already in your file (find new ones)
+duckdb -init sql/similar.sql \
+  -c "SELECT * FROM recommend_from_file('preferences.txt', n:=20, exclude_pref_authors:=true);"
+
+# include books by the same authors too:
+duckdb -init sql/similar.sql \
+  -c "SELECT * FROM recommend_from_file('preferences.txt');"
+
+# see which lines actually matched a book in the corpus (NULL = no match):
+duckdb -init sql/similar.sql -c "SELECT * FROM pref_matches('preferences.txt');"
+```
+
+Matching is fuzzy (`ILIKE` on author + title, most-reprinted wins). Lines that
+don't match anything in the ~28 k corpus are silently skipped — use
+`pref_matches` to check. `preferences.txt` is git-ignored (personal).
 
 ### Gotchas & knobs
 
