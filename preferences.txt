@@ -2,27 +2,27 @@ Andy Weir|The Martian
 Arthur C. Clarke|Rendezvous With Rama
 C. Robert Cargill|Sea of Rust
 C. S. Lewis|Chronicles of Narnia
-Cixin Liu|Death's End
-Cixin Liu|The Dark Forest
-Cixin Liu|The Three-Body Problem
+刘慈欣|Death's End (The Three-Body Problem Series Book 3)
+刘慈欣|The Dark Forest (The Three-Body Problem Series Book 2)
+刘慈欣|三体
 Cory Doctorow|Radicalized
 Isaac Asimov|Buy Jupiter, and other stories
 Isaac Asimov|I, Robot
-James Islington|The Strength of the Few
 James Islington|The Will of the Many
 Kurt Vonnegut|Cat's Cradle
 Kurt Vonnegut|Slaughterhouse-Five
-Lee Child|The killing floor
+Lee Child|Killing Floor
 Lee Child|Tripwire
 Lee Child|Without Fail
 Martha Wells|All Systems Red
-Martha Wells|Compulsion
 Martha Wells|Exit Strategy
 Neal Stephenson|Seveneves
 Neal Stephenson|Snow Crash
-Octavia E. Butler|Lilith's Brood
-Octavia E. Butler|Seed to Harvest
-Olan Thorensen|An Ancient Enemy
-Olan Thorensen|Destiny's Crucible
+Octavia E. Butler|Dawn
+Octavia E. Butler|Adulthood Rites
+Octavia E. Butler|Imago
+Octavia E. Butler|Wild seed
+Octavia E. Butler|Mind of my mind
+Octavia E. Butler|Clay's ark
 Orson Scott Card|Ender's Game
 Philip K. Dick|Do Androids Dream of Electric Sheep?
