@@ -41,6 +41,8 @@
               gotools # goimports, godoc, etc.
               golangci-lint # https://github.com/golangci/golangci-lint
 
+              nodejs_26 # web/ frontend (React + TS + Vite); npm bundled
+
               duckdb
               (python3.withPackages (ps: with ps; [
                 duckdb # read books.duckdb, hash, parquet
