@@ -14,14 +14,16 @@ duckdb -init sql/similar.sql          # starts a session with the tools loaded
 ```
 
 This attaches `data/books.duckdb` read-only and defines two views
-(`book_meta`, `book_vecs`) and four table macros.
+(`book_meta`, `book_vecs`) and six table macros.
 
 ### The views
 
-- `book_vecs` — the working table: one row per embedded book
-  (`input_text, work_key, author, title, year, editions, vec`). Deduped to one
-  canonical row per embedded string (the most-reprinted edition wins), so it's
-  exactly one row per vector (~27.5 k).
+- `book_meta` — canonical metadata, one row per embedded string
+  (`input_text, work_key, author, title, year, editions`); the most-reprinted
+  edition wins. Feeds `book_vecs`.
+- `book_vecs` — the working table: `book_meta` joined to its vector, so one row
+  per embedded book (`input_text, work_key, author, title, year, editions,
+  vec`) — exactly one row per vector (~27.5 k).
 
 ### The macros
 

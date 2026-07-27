@@ -3,7 +3,7 @@
 - all deps from flake.nix+direnv
   - except llama.cpp comes from home brew
 - data is the ["all types dump" from Open Library](https://openlibrary.org/developers/dumps)
-- embeddings using (Qwen/Qwen3-Embedding-8B-GGUF:Q8_0)[https://huggingface.co/Qwen/Qwen3-Embedding-8B-GGUF]
+- embeddings using [Qwen/Qwen3-Embedding-8B-GGUF:Q8_0](https://huggingface.co/Qwen/Qwen3-Embedding-8B-GGUF)
   - downloaded with llama cli like `llama-embedding -hf Qwen/Qwen3-Embedding-8B-GGUF:Q8_0`
 
 ## Docs
