@@ -13,6 +13,7 @@
 - [Comparing books (exploration tools)](./docs/dev/comparing-books.md)
 - [Web backend (Go + embedded DuckDB)](./docs/dev/web-backend.md)
 - [Web frontend (React + TS + Vite)](./docs/dev/web-frontend.md)
+- Experiments: see [`experiments/AGENTS.md`](./experiments/AGENTS.md)
 
 ## Keep docs up to date
 
