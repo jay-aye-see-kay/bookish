@@ -47,6 +47,7 @@
               (python3.withPackages (ps: with ps; [
                 duckdb # read books.duckdb, hash, parquet
                 pyarrow # write parquet parts (fixed_size_list<float32,4096>)
+                polars # sometimes more ergonomic than duckdb
                 numpy # L2-normalize vectors
                 requests # talk to llama-server /v1/embeddings
               ]))
