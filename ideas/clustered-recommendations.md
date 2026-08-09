@@ -1,5 +1,8 @@
 # Clustered recommendations
 
+> [!warning]
+> This document is rought partially superseded by ./preference-clusters.md
+
 ## Problem
 
 `recommend_from_file` (in `sql/similar.sql`) ranks every candidate by the
