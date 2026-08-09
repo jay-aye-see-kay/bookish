@@ -58,7 +58,7 @@ export function useRecommendations() {
     gcTime: 0,
     queryFn: ({ signal }) =>
       apiFetch<Recommendation[]>(
-        "/recommendations?n=20&exclude_rated_authors=false",
+        "/recommendations?n=100&exclude_rated_authors=false",
         { username, signal },
       ),
   });
